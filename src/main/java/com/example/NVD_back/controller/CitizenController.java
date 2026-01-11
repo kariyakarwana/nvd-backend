@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/citizen")
 public class CitizenController {
@@ -19,5 +21,11 @@ public class CitizenController {
     @PreAuthorize("hasAnyRole('ADMIN', 'HEALTH_WORKER')")
     public User searchCitizen(@PathVariable String nic){
         return service.searchByNic(nic);
+    }
+
+    @GetMapping("/all")
+    @PreAuthorize("hasAnyRole('ADMIN', 'HEALTH_WORKER')")
+    public List<User> getAllCitizens(){
+        return service.getAllCitizens();
     }
 }

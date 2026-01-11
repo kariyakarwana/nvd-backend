@@ -22,6 +22,8 @@ public class User {
     // ---- Citizen Details ----
     private String fullname;
 
+    private String title;
+
     @Column(unique = true)
     private String nic;
 
