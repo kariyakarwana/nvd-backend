@@ -45,6 +45,6 @@ jobs:
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
           docker stop nvd-back || true
-          docker rm spting-demo || true
+          docker rm nvd-back || true
           docker pull ${{ secrets.DOCKER_USERNAME }}/nvd-backend:1.0
           docker run -d --name nvd-back -p 8080:8080 ${{ secrets.DOCKER_USERENAME }}/nvd-backend:1.0
