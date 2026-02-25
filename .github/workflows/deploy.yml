@@ -1,0 +1,50 @@
+name: Docker Build -> Push -> Deploy
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+      
+    - name: Setup java
+      uses: actions/setup-java@v5
+      with:
+        distributiion: 'eclips-temurin'
+        java-version: '17-jre'
+
+    - name: Build jar
+      run: |
+        chmod +x ./mvnw
+        ./mvnvw clean packege -DskipTests
+      
+    - name: Login to Docker Hub
+      uses: docker/login-actions@v3
+      with: 
+        username: ${{ secrets.DOCKER_HUBUSERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Build Docker Image
+      run: docker build -t "{{ secret.Docerk_USERNAME }}"/nvd-backend:1.1
+
+    - name: Push Image to Docker Hub
+      run: docker push "{{ secrets.DOCKER_USERNAME }}"/nvd-backend:1.1
+      
+    - name: SSH and Deploy to EC2
+      uses: appleboy/ssh-action@v1
+      with: 
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USER }}
+        key: ${{ secrets.EC2_SSH_KEY }}
+        script: |
+          docker stop spring-demo || true
+          docker rm spting-demo || true
+          docker pull ${{ secrets.DOCKER_USERNAME }}/ nvd-backend:1.1
+          docker run -d --name spring-demo -p 8080:8080 ${{ secrets.DOCKER_USERENAME }}/nvd-backend:1.1
