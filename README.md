@@ -38,7 +38,8 @@ This is a **cloud-native backend service** designed for the NVD system. Built wi
 
 ## 🗄 Database ER Diagram
 
-<img width="2050" height="348" alt="mermaid-diagram-2026-03-03-141350" src="https://github.com/user-attachments/assets/1e4e35dc-147d-4c2d-ba92-a37f9d377244" />
+
+<img width="854" height="710" alt="nvd-ER" src="https://github.com/user-attachments/assets/a97585ae-c5f7-493f-835e-cec9cdf53578" />
 
 ---
 
