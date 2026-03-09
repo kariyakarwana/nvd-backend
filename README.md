@@ -1,6 +1,4 @@
-This looks like a solid foundation for your repository. I’ve polished the formatting, added a touch of professional flair, and organized the sections to make it highly readable for anyone landing on your GitHub page.
 
----
 
 # NVD Backend – Spring Boot REST API
 
